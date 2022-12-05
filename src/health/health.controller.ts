@@ -3,7 +3,7 @@ import {
 	HealthCheck,
 	HealthCheckService,
 	HttpHealthIndicator,
-	SequelizeHealthIndicator,
+	TypeOrmHealthIndicator,
 } from '@nestjs/terminus';
 
 @Controller('health')
@@ -11,7 +11,7 @@ export class HealthController {
 	constructor(
 		private healthCheckService: HealthCheckService,
 		private httpHealthIndicator: HttpHealthIndicator,
-		private dbHealthIndicator: SequelizeHealthIndicator,
+		private dbHealthIndicator: TypeOrmHealthIndicator,
 	) {}
 
 	@Get()

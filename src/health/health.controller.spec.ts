@@ -1,9 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import {
-	HealthCheckService,
-	HttpHealthIndicator,
-	SequelizeHealthIndicator,
-} from '@nestjs/terminus';
+import { HealthCheckService, HttpHealthIndicator, TypeOrmHealthIndicator } from '@nestjs/terminus';
 import { HealthController } from './health.controller';
 
 describe('HealthController', () => {
@@ -22,7 +18,7 @@ describe('HealthController', () => {
 					useValue: jest.fn(),
 				},
 				{
-					provide: SequelizeHealthIndicator,
+					provide: TypeOrmHealthIndicator,
 					useValue: jest.fn(),
 				},
 			],

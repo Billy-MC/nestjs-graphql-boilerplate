@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { SequelizeModule } from '@nestjs/sequelize';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
@@ -12,15 +13,18 @@ import configValidationSchema from './config.schema';
 
 @Module({
 	imports: [
-		SequelizeModule.forRootAsync({
+		TypeOrmModule.forRootAsync({
 			imports: [ConfigModule],
 			inject: [ConfigService],
 			useFactory: async (configService: ConfigService) => ({
-				dialect: 'postgres',
+				type: 'postgres',
 				autoLoadEntities: true,
 				synchronize: true,
 				host: configService.get('POSTGRES_DB_HOST'),
 				port: configService.get('POSTGRES_DB_PORT'),
+				//TODO: add back when decide the user name and password
+				// username: configService.get('POSTGRES_USER'),
+				// password: configService.get('POSTGRES_PASSWORD'),
 				database: configService.get('POSTGRES_DB'),
 				models: [],
 			}),
