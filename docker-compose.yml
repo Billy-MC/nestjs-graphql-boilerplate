@@ -13,7 +13,7 @@ services:
     ports:
       - ${POSTGRES_DB_PORT}:${POSTGRES_DB_PORT}
     volumes:
-      - ./pgdata:/var/lib/postgresql/data
+      - ~/dbdata:/var/lib/postgresql/data
   api:
     build:
       dockerfile: Dockerfile
@@ -23,11 +23,15 @@ services:
     volumes:
       - .:/usr/src/app
     env_file:
-    - .env
+      - .env
+    environment:
+      POSTGRES_DB_HOST: postgres
     # Run a command against the development stage of the image
     command: npm run start:dev
     ports:
       - ${PORT}:${PORT}
+    networks:
+      - nesjs-network
     depends_on:
       - postgres
 

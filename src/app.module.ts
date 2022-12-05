@@ -22,9 +22,8 @@ import configValidationSchema from './config.schema';
 				synchronize: true,
 				host: configService.get('POSTGRES_DB_HOST'),
 				port: configService.get('POSTGRES_DB_PORT'),
-				//TODO: add back when decide the user name and password
-				// username: configService.get('POSTGRES_USER'),
-				// password: configService.get('POSTGRES_PASSWORD'),
+				username: configService.get('POSTGRES_USER'),
+				password: configService.get('POSTGRES_PASSWORD'),
 				database: configService.get('POSTGRES_DB'),
 				models: [],
 			}),
