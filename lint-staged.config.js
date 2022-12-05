@@ -13,7 +13,7 @@ const removeIgnoredFiles = async files => {
 
 module.exports = {
 	'*.{js,ts,md,json,d.ts}': ['prettier --write', 'git add .'],
-	'*.{js,ts,tsx,json,d.ts}': async files => {
+	'*.{js,ts,json,d.ts}': async files => {
 		const filesToLint = await removeIgnoredFiles(files);
 		return [`eslint --fix --max-warnings=0 ${filesToLint}`];
 	},
